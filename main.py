@@ -65,5 +65,4 @@ elif selection == 6:
 
 
 while program_loop:
-    displaymenu()
     program_loop = selectionmenu
