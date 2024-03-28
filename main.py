@@ -1,3 +1,7 @@
+import random
+program_loop = True
+
+
 name = input("Type in your name here: ")
 
 def displaymenu():
@@ -25,3 +29,7 @@ elif selection == 5:
     accountmodify()
 elif selection == 6:
     accountdelete()
+
+while program_loop:
+    displaymenu()
+    program_loop = selectionmenu
