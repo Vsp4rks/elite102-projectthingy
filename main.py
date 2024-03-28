@@ -2,6 +2,26 @@ import random
 program_loop = True
 
 
+
+
+def balance():
+    print("filler text")
+
+def withdraw():
+    print("filler text")
+
+def deposit():
+    print("filler text")
+
+def accountcreate():
+    print("filler text")
+
+def accountmodify():
+    print("filler text")
+
+def accountdelete():
+    print("filler text")
+
 name = input("Type in your name here: ")
 
 def displaymenu():
@@ -29,6 +49,7 @@ elif selection == 5:
     accountmodify()
 elif selection == 6:
     accountdelete()
+
 
 while program_loop:
     displaymenu()
