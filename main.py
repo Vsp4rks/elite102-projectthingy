@@ -11,5 +11,17 @@ def displaymenu():
     print("6. Delete Account")
 
 def selectionmenu():
-    in_use = True
-    selection = int(input("Choose one of the options listed above: "))
+ in_use = True
+selection = int(input("Choose one of the options listed above: "))
+if selection == 1:
+    balance()
+elif selection == 2:
+    deposit()
+elif selection == 3:
+    withdraw()
+elif selection == 4:
+    accountcreate()
+elif selection == 5:
+    accountmodify()
+elif selection == 6:
+    accountdelete()
