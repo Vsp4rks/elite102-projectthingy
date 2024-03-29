@@ -45,6 +45,7 @@ def displaymenu():
     print("4. Create Account")
     print("5. Modify Account")
     print("6. Delete Account\n")
+    selectionmenu()
 
 def selectionmenu():
  displaymenu()
