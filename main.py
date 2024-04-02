@@ -1,6 +1,11 @@
 import random
-program_loop = True
+import mysqlconnector
 
+connection = mysql.connector.connect(user = 'root', database = 'abdcefg', password = 'g01108PF!')
+connection.close()
+
+
+program_loop = True
 
 
 
