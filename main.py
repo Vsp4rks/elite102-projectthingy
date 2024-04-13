@@ -14,9 +14,12 @@ account = None
 
 
 def checkbalance():
-    cursor.execute("SELECT balance FROM users WHERE username = %s", (username,))    cursor.execute(f"SELECT Balance FROM bankdata WHERE id = {account[1]}")
+    cursor.execute(f"SELECT Balance FROM bankdata WHERE id = {account[1]}")
     result = cursor.fetchone()
-    for x in result:
-        print(x)
+    return queryData[1]
 
-def 
+def deposit(amt):
+    os.system("cls")
+    cursor.execute (f"UPDATE bankdata SET Balance = Balance + {amt} WHERE ID = '{account[1]}'")
+    connection.commit()
+    print(f"${amt} deposited successfully!")
