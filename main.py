@@ -94,6 +94,21 @@ while True:
         account = cursor.fetchone()
         break
 
+while True:
+    response = int(input("What would you like to do?\n\n1: Check Balance\n2: Make a Deposit\n3: Make a Withdrawal\n4: Delete Your Account"))
+
+    if response == 1:
+        checkbalance()
+    elif response == 2:
+        amt = float(input("How much do you want to deposit? \n"))
+        deposit(amt)
+    elif response == 3:
+        amt = float(input("How much do you want to withdraw?\n"))
+        withdraw(amt)
+    elif response == 5:
+       accountdelete()
+
+#fix things up, then start on gui
 
 #database close
 cursor.close
