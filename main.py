@@ -1,36 +1,34 @@
 import os
 import mysql.connector
 
-#later find out why it doesnt think its connected
-#context: whenever i reference my sql table at all it (or any sql stuff),
-#it doesnt know what im talking about and comes up as an error
 
-connection = mysql.connector.connect(
+def main():
+ connection = mysql.connector.connect(
       user = "root",
       database = "abcdefg",
       password = "g01108PF!"
 )
 
-cursor = connection.cursor()
+ cursor = connection.cursor()
 
-account = None
+ account = None
 
-#important stuff goes below this comment
+ #important stuff goes below this comment
 
-def checkbalance():
+ def checkbalance():
     os.system("cls")
     cursor.execute(f"SELECT Balance FROM bankdata WHERE id = {account[0]}")
     queryData = cursor.fetchone()
     return queryData[0]
 
-def deposit(amt):
+ def deposit(amt):
     os.system("cls")
     cursor.execute (f"UPDATE bankdata SET Balance = Balance + {amt} WHERE ID = '{account[0]}'")
     connection.commit()
     print(f"${amt} deposited successfully!")
 
-def accountcreate():
-     addData = ("INSERT into bankdata(Username, Password, Balance) VALUES (%s,%s,%s)")
+ def accountcreate():
+     addData = (f"INSERT into bankdata(Username, Password, Balance) VALUES (%s,%s,%s)")
      Username = input("Username?: ")
      Password = input ("Password?: ")
      Balance = input("Balance?: ")
@@ -39,15 +37,14 @@ def accountcreate():
                Balance
                )
      
-      cursor.execute(addData, values) #i actually cant put it anywhere else or else everything else gets an error
-      connection.commit()
+     cursor.execute(addData, values)
+     connection.commit()
 
 
-def withdraw(amt):
+ def withdraw(amt):
   os.system("cls")
   print("How much would you like to withdraw?: ")
   withdraw_amt = float(input("> "))
-    #check if valid
    if withdraw_amt <= 0:
       print("Invalid amount!")
       return
@@ -58,14 +55,13 @@ def withdraw(amt):
    connection.commit()
    print(f"${withdraw_amt} withdrawn successfully!")
   
-def accountdelete():
+ def accountdelete():
     cursor.execute(f"DELETE FROM bankdata WHERE ID = {account[0]}")
     connection.commit()
     print("Account deleted successfully!")
 
-#time for CUI thing
 
-while True:
+ while True:
    
    answer = int(input("Good Afternoon! What would you like to do today?\n\n1: Login\n 2: Sign up\n"))
     
@@ -75,7 +71,7 @@ while True:
 
       #does the account exist?
       #if not, say something then go back to start
-      cursor.execute(f"SELECT * FROM bankdata WHERE Username = '{Username}' AND Password '{Password}'")
+      cursor.execute(f"SELECT * FROM bankdata WHERE Username = '{username}' AND Password '{password}'")
       user = cursor.fetchone()
       if (user != None):
          account = user
@@ -94,22 +90,26 @@ while True:
         account = cursor.fetchone()
         break
 
-while True:
-    response = int(input("What would you like to do?\n\n1: Check Balance\n2: Make a Deposit\n3: Make a Withdrawal\n4: Delete Your Account"))
+ while True:
+    response = int(input("What would you like to do?\n\n1: Check Balance\n2: Make a Deposit\n3: Make a Withdrawal\n4: Make a New Account\n5: Delete Your Account"))
 
     if response == 1:
         checkbalance()
     elif response == 2:
         amt = float(input("How much do you want to deposit? \n"))
-        deposit(amt)
+        deposit()
     elif response == 3:
-        amt = float(input("How much do you want to withdraw?\n"))
-        withdraw(amt)
+        amt = float(input("How much do you want to withdraw? \n"))
+        withdraw()
+    elif response == 4:
+       accountcreate()
     elif response == 5:
        accountdelete()
 
-#fix things up, then start on gui
 
-#database close
-cursor.close
-connection.close
+ #database close
+ cursor.close
+ connection.close
+
+if __name__ == "__main__":
+  main()
