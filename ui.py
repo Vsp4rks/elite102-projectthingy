@@ -1,5 +1,6 @@
-import tkinter as tk
 import main
+import tkinter as tk
+
 
 class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -34,26 +35,24 @@ class Application(tk.Tk):
         print(f"Username: {username}, Password: {password}")
 
 
-    label_title = tk.Label(self, text="MAIN APP", font=("Helvetica", 20))
-    label_title.pack(pady=20)
+    # label_title = tk.Label(self, text="MAIN APP", font=("Helvetica", 20))
+    # label_title.pack(pady=20)
 
-        # Placeholder for account information and options
+    # label_balance = tk.Label(self, text="Your Balance:", font=("Helvetica", 16))
+    # label_balance.pack()
+    # balance_value = tk.Label(self, text="placeholder") 
+    # balance_value.pack()
 
-    label_balance = tk.Label(self, text="Your Balance:", font=("Helvetica", 16))
-    label_balance.pack()
-    balance_value = tk.Label(self, text="") 
-    balance_value.pack()
-
-    button_balancecheck = tk.Button(self, text="Check your balance", command=self.checkbalance)
-    button_balancecheck.pack(pady=5)
-    button_deposit = tk.Button(self, text="Make a Deposit", command=self.deposit)
-    button_deposit.pack(pady=5)
-    button_withdraw = tk.Button(self, text="Make a Withdrawal", command=self.withdrawal)
-    button_withdraw.pack(pady=5)
-    button_create = tk.Button(self, text="Create New Account", command=self.accountcreate)
-    button_create.pack(pady=5)
-    button_delete = tk.Button(self, text="Delete Account", command=self.accountdelete)
-    button_delete.pack(pady=5)
+    # button_balancecheck = tk.Button(self, text="Check your balance", command=self.checkbalance)
+    # button_balancecheck.pack(pady=5)
+    # button_deposit = tk.Button(self, text="Make a Deposit", command=self.deposit)
+    # button_deposit.pack(pady=5)
+    # button_withdraw = tk.Button(self, text="Make a Withdrawal", command=self.withdrawal)
+    # button_withdraw.pack(pady=5)
+    # button_create = tk.Button(self, text="Create New Account", command=self.accountcreate)
+    # button_create.pack(pady=5)
+    # button_delete = tk.Button(self, text="Delete Account", command=self.accountdelete)
+    # button_delete.pack(pady=5)
 
 if __name__ == "__main__":
     app = Application()
