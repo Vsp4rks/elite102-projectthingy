@@ -4,15 +4,14 @@ import tkinter as tk
 
 class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
-        tk.Tk.__init__(self, *args, **kwargs)
+     tk.Tk.__init__(self, *args, **kwargs)
 
-        self.geometry("600x400")
-        self.resizable(False, False)
-        self.title("Bank App")
+     self.geometry("600x400") 
+     self.resizable(False, False)
+     self.title("Bank App")
 
-        self.create_widgets()
 
-    def create_widgets(self):
+     def create_widgets(self):
         label_title = tk.Label(self, text="V.C.S. Banking", font=("Helvetica", 20))
         label_title.pack(pady=20)
 
@@ -31,12 +30,14 @@ class Application(tk.Tk):
         button_login = tk.Button(self, text="Login", command=lambda: self.login(entry_username.get(), entry_password.get()))
         button_login.pack(pady=10)
 
-    def login(self, username, password):
+        self.create_widgets()
+
+     def login(self, username, password):
         print(f"Username: {username}, Password: {password}")
 
 
 
-    def withdraw(self):
+     def withdraw(self):
         withdraw_window = tk.Toplevel(self)
         withdraw_window.title("Withdraw Money")
 
@@ -65,7 +66,7 @@ class Application(tk.Tk):
                 tk.messagebox.showerror("Error", "Invalid withdrawal amount. Please enter a valid number.")
         pass
 
-    def deposit(self):
+     def deposit(self):
         deposit_window = tk.Toplevel(self)
         deposit_window.title("Deposit Money")
 
@@ -91,12 +92,12 @@ class Application(tk.Tk):
                 tk.messagebox.showerror("Error", "Invalid deposit amount. Please enter a valid number.")
         pass
 
-    def checkbalance(self):
+     def checkbalance(self):
         balance = main.checkbalance()
         tk.messagebox.showinfo("Balance", f"Your balance is: ${balance}")
         pass
 
-    def createaccount(self):
+     def createaccount(self):
         new_account_window = tk.Toplevel(self)
         new_account_window.title("Create New Account")
 
@@ -122,7 +123,7 @@ class Application(tk.Tk):
         button_create_account.grid(row=3, column=0, columnspan=2, pady=10)
         pass
 
-    def deleteaccount(self):
+     def deleteaccount(self):
             confirm_dialog = tk.messagebox.askyesno(
                 "Delete Account", "Are you sure you want to delete your account? This action cannot be undone.")
 
@@ -130,22 +131,22 @@ class Application(tk.Tk):
                 self.destroy()
                 main.accountdelete()
                 tk.messagebox.showinfo("Success", "Your account has been deleted successfully.")
-    pass
+     pass
 
-    button_withdraw = tk.Button(self, text="Withdraw", command=lambda: self.withdraw())
-    button_withdraw.pack(pady=10)
+     button_withdraw = tk.Button(self, text="Withdraw", command=lambda: self.withdraw())
+     button_withdraw.pack(pady=10)
 
-    button_deposit = tk.Button(self, text="Deposit", command=lambda: self.deposit())
-    button_deposit.pack(pady=10)
+     button_deposit = tk.Button(self, text="Deposit", command=lambda: self.deposit())
+     button_deposit.pack(pady=10)
 
-    button_checkbalance = tk.Button(self, text="Check Balance", command=lambda: self.checkbalance())
-    button_checkbalance.pack(pady=10)
+     button_checkbalance = tk.Button(self, text="Check Balance", command=lambda: self.checkbalance())
+     button_checkbalance.pack(pady=10)
 
-    button_createaccount = tk.Button(self, text="New Account", command=lambda: self.newaccount())
-    button_createaccount.pack(pady=10)
+     button_createaccount = tk.Button(self, text="New Account", command=lambda: self.createaccount())
+     button_createaccount.pack(pady=10)
 
-    button_deleteaccount = tk.Button(self, text="Delete Account", command=lambda: self.delaccount())
-    button_deleteaccount.pack(pady=10)
+     button_deleteaccount = tk.Button(self, text="Delete Account", command=lambda: self.deleteaccount())
+     button_deleteaccount.pack(pady=10)
 
 
 
