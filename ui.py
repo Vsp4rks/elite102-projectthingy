@@ -35,24 +35,119 @@ class Application(tk.Tk):
         print(f"Username: {username}, Password: {password}")
 
 
-    # label_title = tk.Label(self, text="MAIN APP", font=("Helvetica", 20))
-    # label_title.pack(pady=20)
 
-    # label_balance = tk.Label(self, text="Your Balance:", font=("Helvetica", 16))
-    # label_balance.pack()
-    # balance_value = tk.Label(self, text="placeholder") 
-    # balance_value.pack()
+    def withdraw(self):
+        withdraw_window = tk.Toplevel(self)
+        withdraw_window.title("Withdraw Money")
 
-    # button_balancecheck = tk.Button(self, text="Check your balance", command=self.checkbalance)
-    # button_balancecheck.pack(pady=5)
-    # button_deposit = tk.Button(self, text="Make a Deposit", command=self.deposit)
-    # button_deposit.pack(pady=5)
-    # button_withdraw = tk.Button(self, text="Make a Withdrawal", command=self.withdrawal)
-    # button_withdraw.pack(pady=5)
-    # button_create = tk.Button(self, text="Create New Account", command=self.accountcreate)
-    # button_create.pack(pady=5)
-    # button_delete = tk.Button(self, text="Delete Account", command=self.accountdelete)
-    # button_delete.pack(pady=5)
+        label_amount = tk.Label(withdraw_window, text="Amount to Withdraw:", font=("Helvetica", 12))
+        label_amount.grid(row=0, column=0, pady=10)
+
+        entry_amount = tk.Entry(withdraw_window, width=20)
+        entry_amount.grid(row=0, column=1, padx=10)
+
+        button_withdraw = tk.Button(withdraw_window, text="Withdraw", command=lambda: self.confirm_withdraw(entry_amount.get()))
+        button_withdraw.grid(row=1, column=0, columnspan=2, pady=10)
+
+        def confirm_withdraw(self, amount):
+            try:
+                amount = float(amount)
+                if amount <= 0:
+                    tk.messagebox.showerror("Error", "Invalid withdrawal amount. Please enter a positive value.")
+                    return
+                if amount > main.checkbalance():
+                    tk.messagebox.showerror("Error", "Insufficient funds. Please enter a valid amount.")
+                    return
+                main.withdraw(amount)
+                tk.messagebox.showinfo("Success", f"Successfully withdrawn ${amount} from your account.")
+                withdraw_window.destroy()
+            except ValueError:
+                tk.messagebox.showerror("Error", "Invalid withdrawal amount. Please enter a valid number.")
+        pass
+
+    def deposit(self):
+        deposit_window = tk.Toplevel(self)
+        deposit_window.title("Deposit Money")
+
+        label_amount = tk.Label(deposit_window, text="Amount to Deposit:", font=("Helvetica", 12))
+        label_amount.grid(row=0, column=0, pady=10)
+
+        entry_amount = tk.Entry(deposit_window, width=20)
+        entry_amount.grid(row=0, column=1, padx=10)
+
+        button_deposit = tk.Button(deposit_window, text="Deposit", command=lambda: self.confirm_deposit(entry_amount.get()))
+        button_deposit.grid(row=1, column=0, columnspan=2, pady=10)
+
+        def confirm_deposit(self, amount):
+            try:
+                amount = float(amount)
+                if amount <= 0:
+                    tk.messagebox.showerror("Error", "Invalid deposit amount. Please enter a positive value.")
+                    return
+                main.deposit(amount)
+                tk.messagebox.showinfo("Success", f"Successfully deposited ${amount} into your account.")
+                deposit_window.destroy()
+            except ValueError:
+                tk.messagebox.showerror("Error", "Invalid deposit amount. Please enter a valid number.")
+        pass
+
+    def checkbalance(self):
+        balance = main.checkbalance()
+        tk.messagebox.showinfo("Balance", f"Your balance is: ${balance}")
+        pass
+
+    def createaccount(self):
+        new_account_window = tk.Toplevel(self)
+        new_account_window.title("Create New Account")
+
+        label_username = tk.Label(new_account_window, text="Username:", font=("Helvetica", 12))
+        label_username.grid(row=0, column=0, pady=10)
+
+        entry_username = tk.Entry(new_account_window, width=20)
+        entry_username.grid(row=0, column=1, padx=10)
+
+        label_password = tk.Label(new_account_window, text="Password:", font=("Helvetica", 12))
+        label_password.grid(row=1, column=0, pady=10)
+
+        entry_password = tk.Entry(new_account_window, width=20, show="*")
+        entry_password.grid(row=1, column=1, padx=10)
+
+        label_balance = tk.Label(new_account_window, text="Initial Balance:", font=("Helvetica", 12))
+        label_balance.grid(row=2, column=0, pady=10)
+
+        entry_balance = tk.Entry(new_account_window, width=20)
+        entry_balance.grid(row=2, column=1, padx=10)
+
+        button_create_account = tk.Button(new_account_window, text="Create Account", command=lambda: self.create_account(entry_username.get(), entry_password.get(), entry_balance.get()))
+        button_create_account.grid(row=3, column=0, columnspan=2, pady=10)
+        pass
+
+    def deleteaccount(self):
+            confirm_dialog = tk.messagebox.askyesno(
+                "Delete Account", "Are you sure you want to delete your account? This action cannot be undone.")
+
+            if confirm_dialog:
+                self.destroy()
+                main.accountdelete()
+                tk.messagebox.showinfo("Success", "Your account has been deleted successfully.")
+    pass
+
+    button_withdraw = tk.Button(self, text="Withdraw", command=lambda: self.withdraw())
+    button_withdraw.pack(pady=10)
+
+    button_deposit = tk.Button(self, text="Deposit", command=lambda: self.deposit())
+    button_deposit.pack(pady=10)
+
+    button_checkbalance = tk.Button(self, text="Check Balance", command=lambda: self.checkbalance())
+    button_checkbalance.pack(pady=10)
+
+    button_createaccount = tk.Button(self, text="New Account", command=lambda: self.newaccount())
+    button_createaccount.pack(pady=10)
+
+    button_deleteaccount = tk.Button(self, text="Delete Account", command=lambda: self.delaccount())
+    button_deleteaccount.pack(pady=10)
+
+
 
 if __name__ == "__main__":
     app = Application()
