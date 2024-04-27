@@ -1,6 +1,17 @@
 import main
 import tkinter as tk
+import os
+import mysql.connector
 
+connection = mysql.connector.connect(
+      user = "root",
+      database = "abcdefg",
+      password = "g01108PF!"
+)
+
+cursor = connection.cursor()
+
+account = None
 
 class Application(tk.Tk):
     def __init__(self, *args, **kwargs):
@@ -33,7 +44,19 @@ class Application(tk.Tk):
         self.create_widgets()
 
      def login(self, username, password):
-        print(f"Username: {username}, Password: {password}")
+        global account
+        cursor.execute(f"SELECT * FROM bankdata WHERE Username = '{username}' AND Password = '{password}'")
+        user = cursor.fetchone()
+        if (user != None):
+            account = user
+            self.destroy()
+            main_window = tk.Toplevel(self)
+            main_window.title("Main Menu")
+            return
+        else:
+            print("Not an existing user. Please try again.\n")
+            os.system("cls")
+            return
 
 
 
